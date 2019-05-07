@@ -1,0 +1,17 @@
+services:
+# Name of this service.
+  betelgeuseridho.test_subscriber:
+    # Event subscriber class that will listen for the events.
+    class: '\Drupal\eventridho\EventSubscriber\TestEventSubscriber'
+
+    # arguments: ['@entity_type.manager']
+
+    # Tagged as an event_subscriber to register this subscriber with the event_dispatch service.
+    tags:
+      - { name: 'event_subscriber' }
+
+  # Subscriber to the event we dispatch in hook_user_login.
+  custom_events_user_login:
+    class: '\Drupal\eventridho\EventSubscriber\UserLoginSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

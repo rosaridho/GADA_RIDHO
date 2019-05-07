@@ -1,0 +1,130 @@
+{
+    "name": "ridhorosa/betelgeuseclone",
+    "description": "GADA betelgeuse clone",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "",
+            "role": ""
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6.5",
+        "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/adminimal_admin_toolbar": "^1.9",
+        "drupal/commerce": "^2.13",
+        "drupal/commerce_inventory": "^1.0@alpha",
+        "drupal/commerce_pricelist": "^2.0@beta",
+        "drupal/commerce_shipping": "^2.0@beta",
+        "drupal/config_ignore": "^2.1",
+        "drupal/config_split": "^1.4",
+        "drupal/console": "^1.0.2",
+        "drupal/core": "^8.7.0",
+        "drupal/devel": "^2.1",
+        "drupal/dropzonejs": "^2.0@alpha",
+        "drupal/drush": "^6.0@RC",
+        "drupal/field_group": "^1.0",
+        "drupal/field_permissions": "^1.0@RC",
+        "drupal/flag": "^4.0@alpha",
+        "drupal/fortytwo_admin": "^1.17",
+        "drupal/fortytwo_admin_toolbar": "^1.6",
+        "drupal/geofield": "^1.3",
+        "drupal/geofield_map": "^2.36",
+        "drupal/graphql_search_api": "^1.0@RC",
+        "drupal/improved_multi_select": "^1.3",
+        "drupal/leaflet": "^1.9",
+        "drupal/media_bulk_upload": "^1.0@alpha",
+        "drupal/message": "^1.0@RC",
+        "drupal/message_notify": "^1.0@beta",
+        "drupal/onesignal": "1.x-dev",
+        "drupal/openapi": "^1.0@beta",
+        "drupal/openapi_ui": "^1.0@RC",
+        "drupal/openapi_ui_swagger": "^1.0@RC",
+        "drupal/physical": "^1.0",
+        "drupal/private_message": "^1.2",
+        "drupal/raven": "^2.14",
+        "drupal/redis": "^1.1",
+        "drupal/redis_batch": "1.x-dev",
+        "drupal/role_delegation": "^1.0@alpha",
+        "drupal/search_api": "^1.12",
+        "drupal/search_api_location": "^1.0@alpha",
+        "drupal/search_api_solr": "^2.7",
+        "drupal/shs": "^1.0@alpha",
+        "drupal/simple_oauth": "^3.15",
+        "drupal/swiftmailer": "^1.0@beta",
+        "drupal/token": "^1.5",
+        "drupal/views_bulk_edit": "^2.2",
+        "drupal/views_bulk_operations": "^2.5",
+        "drupal/views_data_export": "^1.0@beta",
+        "drupal/vppr": "^1.0",
+        "drush/drush": "^9.0.0",
+        "enyo/dropzone": "^5.5",
+        "mnsami/composer-custom-directory-installer": "^1.1",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "swagger-api/swagger-ui": "^3.22",
+        "vlucas/phpdotenv": "^2.4",
+        "webflo/drupal-finder": "^1.1",
+        "webmozart/path-util": "^2.3",
+        "zaporylie/composer-drupal-optimizations": "^1.0"
+    },
+    "require-dev": {
+        "webflo/drupal-core-require-dev": "^8.7.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ],
+        "files": ["load.environment.php"]
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ]
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/{$name}": ["type:drupal-drush"]
+        },
+        "drupal-scaffold": {
+            "initial": {
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes"
+            }
+        }
+    }
+}
