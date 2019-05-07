@@ -42,6 +42,9 @@ use Drupal\user\UserInterface;
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
  *     "status" = "status",
+*      "question" = "question",
+ *     "percentage" = "percentage",
+ *     "subject" = "subject",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/challenge_drupal/{challenge_drupal}",
@@ -145,6 +148,51 @@ class ChallengeDrupal extends ContentEntityBase implements ChallengeDrupalInterf
   /**
    * {@inheritdoc}
    */
+  public function getQuestion() {
+    return $this->get('question')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setQuestion($question) {
+    $this->set('question', $question);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPercentage() {
+    return $this->get('percentage')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setPercentage($percentage) {
+    $this->set('percentage', $percentage);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSubject() {
+    return $this->get('subject')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setSubject($subject) {
+    $this->set('subject', $subject);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -210,6 +258,78 @@ class ChallengeDrupal extends ContentEntityBase implements ChallengeDrupalInterf
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+      $fields['subject'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('The subject'))
+      ->setDescription(t('The subject'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'subject_drupal')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+      $fields['question'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Question'))
+      ->setDescription(t('The number of question.'))
+      // ->setSettings([
+      //   'max_length' => 255,
+      //   'text_processing' => 0,
+      // ])
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setStorageRequired(FALSE)
+      ->setRequired(FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['percentage'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Percentage'))
+      ->setDescription(t('The percentage of the challenge.'))
+      // ->setSettings([
+      //   'max_length' => 255,
+      //   'text_processing' => 0,
+      // ])
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setStorageRequired(FALSE)
+      ->setRequired(FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+
 
     return $fields;
   }

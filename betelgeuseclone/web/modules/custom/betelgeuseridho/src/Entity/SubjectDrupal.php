@@ -42,6 +42,8 @@ use Drupal\user\UserInterface;
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
  *     "status" = "status",
+ *     "startAt" = "startAt",
+ *     "finishAt" = "finishAt",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/subject_drupal/{subject_drupal}",
@@ -142,6 +144,38 @@ class SubjectDrupal extends ContentEntityBase implements SubjectDrupalInterface 
     return $this;
   }
 
+    /**
+   * {@inheritdoc}
+   */
+  public function getStartAt() {
+    return $this->get('startAt')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setStartAt($startAt) {
+    $this->set('startAt', $startAt);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFinishAt() {
+    return $this->get('finishAt')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setFinishAt($finishAt) {
+    $this->set('finishAt', $finishAt);
+    return $this;
+  }
+
+  
+
   /**
    * {@inheritdoc}
    */
@@ -210,6 +244,44 @@ class SubjectDrupal extends ContentEntityBase implements SubjectDrupalInterface 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+    $fields['startAt'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Start at'))
+      ->setDescription(t('The startAt of the Subject drupal entity.'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ])
+      ->setSettings([
+        'datetime_type' => 'date'
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+    $fields['finishAt'] = BaseFieldDefinition::create('timestamp')
+      ->setLabel(t('Finish at'))
+      ->setDescription(t('The finishAt of the Subject drupal entity.'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ])
+      ->setSettings([
+        'datetime_type' => 'time'
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
 
     return $fields;
   }

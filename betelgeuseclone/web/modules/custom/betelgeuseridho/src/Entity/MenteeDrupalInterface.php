@@ -74,4 +74,43 @@ interface MenteeDrupalInterface extends ContentEntityInterface, EntityChangedInt
    */
   public function setPublished($published);
 
+  /**
+   * Gets the City.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getTelephone();
+
+  /**
+   * Sets the City.
+   *
+   * @param string $city
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setTelephone($telephone);
+
+  /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getAttendanceNumber();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setAttendanceNumber($attendance_number);
+
+
 }

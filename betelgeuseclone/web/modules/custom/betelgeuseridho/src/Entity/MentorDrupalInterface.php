@@ -74,4 +74,61 @@ interface MentorDrupalInterface extends ContentEntityInterface, EntityChangedInt
    */
   public function setPublished($published);
 
+  /**
+   * Gets the City.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getTelephone();
+
+  /**
+   * Sets the City.
+   *
+   * @param string $city
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setTelephone($telephone);
+
+  /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getSubject();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setSubject($status);
+
+  /**
+   * Gets the Mentor drupal creation timestamp.
+   *
+   * @return int
+   *   Creation timestamp of the Mentor drupal.
+   */
+  public function getCardinal();
+
+  /**
+   * Sets the Mentor drupal creation timestamp.
+   *
+   * @param int $timestamp
+   *   The Mentor drupal creation timestamp.
+   *
+   * @return \Drupal\ridhodrupal\Entity\MentorDrupalInterface
+   *   The called Mentor drupal entity.
+   */
+  public function setCardinal($timestamp);
+
 }

@@ -41,6 +41,7 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
+ *     "telephone" = "telephone",
  *     "status" = "status",
  *   },
  *   links = {
@@ -142,6 +143,36 @@ class DirectorDrupal extends ContentEntityBase implements DirectorDrupalInterfac
     return $this;
   }
 
+      /**
+   * {@inheritdoc}
+   */
+  public function getTelephone() {
+    return $this->get('telephone')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setTelephone($telephone) {
+    $this->set('telephone', $telephone);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getStatus() {
+    return $this->get('status')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setStatus($status) {
+    $this->set('status', $status);
+    return $this;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -210,6 +241,37 @@ class DirectorDrupal extends ContentEntityBase implements DirectorDrupalInterfac
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+    $fields['telephone'] = BaseFieldDefinition::create('telephone')
+      ->setName('telephone')
+      ->setLabel(t('Telephone'))
+      ->setSettings([])
+      ->setDisplayOptions('form', [
+        'weight' => 2,
+      ]);
+
+    $fields['status'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Status'))
+      ->setDescription(t('The Status of the Director.'))
+      ->setSettings([
+        'max_length' => 255,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -2,
+      ])
+      ->setStorageRequired(FALSE)
+      ->setRequired(FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
 
     return $fields;
   }

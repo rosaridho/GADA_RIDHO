@@ -42,6 +42,11 @@ use Drupal\user\UserInterface;
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
  *     "status" = "status",
+ *     "date" = "date",
+ *     "subject" = "subject",
+ *     "question" = "question",
+ *     "percentage" = "percentage",
+
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/livecode_drupal/{livecode_drupal}",
@@ -134,13 +139,76 @@ class LivecodeDrupal extends ContentEntityBase implements LivecodeDrupalInterfac
     return (bool) $this->getEntityKey('status');
   }
 
-  /**
+    /**
    * {@inheritdoc}
    */
   public function setPublished($published) {
     $this->set('status', $published ? TRUE : FALSE);
     return $this;
   }
+
+    /**
+   * {@inheritdoc}
+   */
+  public function getDate() {
+    return $this->get('date')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDate($date) {
+    $this->set('date', $date);
+    return $this;
+  }
+
+      /**
+   * {@inheritdoc}
+   */
+  public function getSubject() {
+    return $this->get('subject')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setSubject($subject) {
+    $this->set('subject', $subject);
+    return $this;
+  }
+
+      /**
+   * {@inheritdoc}
+   */
+  public function getQuestion() {
+    return $this->get('question')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setQuestion($question) {
+    $this->set('question', $question);
+    return $this;
+  }
+
+      /**
+   * {@inheritdoc}
+   */
+  public function getPercentage() {
+    return $this->get('percentage')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setPercentage($percentage) {
+    $this->set('percentage', $percentage);
+    return $this;
+  }
+
+
+
 
   /**
    * {@inheritdoc}
@@ -150,7 +218,7 @@ class LivecodeDrupal extends ContentEntityBase implements LivecodeDrupalInterfac
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of author of the Livecode drupal entity.'))
+      ->setDescription(t('The user ID of author of the Mentee drupal entity.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -175,7 +243,7 @@ class LivecodeDrupal extends ContentEntityBase implements LivecodeDrupalInterfac
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Livecode drupal entity.'))
+      ->setDescription(t('The name of the Mentee drupal entity.'))
       ->setSettings([
         'max_length' => 50,
         'text_processing' => 0,
@@ -196,7 +264,7 @@ class LivecodeDrupal extends ContentEntityBase implements LivecodeDrupalInterfac
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Publishing status'))
-      ->setDescription(t('A boolean indicating whether the Livecode drupal is published.'))
+      ->setDescription(t('A boolean indicating whether the Mentee drupal is published.'))
       ->setDefaultValue(TRUE)
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
@@ -210,6 +278,94 @@ class LivecodeDrupal extends ContentEntityBase implements LivecodeDrupalInterfac
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+      $fields['date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Date'))
+      ->setDescription(t('The startAt of the Subject drupal entity.'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+      $fields['subject'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('The subject'))
+      ->setDescription(t('The subject'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'subject_drupal')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+      $fields['question'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Question'))
+      ->setDescription(t('The number of question.'))
+      // ->setSettings([
+      //   'max_length' => 255,
+      //   'text_processing' => 0,
+      // ])
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setStorageRequired(FALSE)
+      ->setRequired(FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['percentage'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Percentage'))
+      ->setDescription(t('The percentage of the challenge.'))
+      // ->setSettings([
+      //   'max_length' => 255,
+      //   'text_processing' => 0,
+      // ])
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => -2,
+      ])
+      ->setStorageRequired(FALSE)
+      ->setRequired(FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+      
 
     return $fields;
   }

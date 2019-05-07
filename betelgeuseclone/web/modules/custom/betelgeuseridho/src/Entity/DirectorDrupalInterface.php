@@ -74,4 +74,43 @@ interface DirectorDrupalInterface extends ContentEntityInterface, EntityChangedI
    */
   public function setPublished($published);
 
+  /**
+   * Gets the City.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getTelephone();
+
+  /**
+   * Sets the City.
+   *
+   * @param string $city
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setTelephone($telephone);
+
+  /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getStatus();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setStatus($status);
+
+
 }

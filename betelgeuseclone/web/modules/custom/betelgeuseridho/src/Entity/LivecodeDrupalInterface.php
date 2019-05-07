@@ -13,65 +13,143 @@ use Drupal\user\EntityOwnerInterface;
  */
 interface LivecodeDrupalInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface {
 
+ 
   // Add get/set methods for your configuration properties here.
 
   /**
-   * Gets the Livecode drupal name.
+   * Gets the Mentee drupal name.
    *
    * @return string
-   *   Name of the Livecode drupal.
+   *   Name of the Mentee drupal.
    */
   public function getName();
 
   /**
-   * Sets the Livecode drupal name.
+   * Sets the Mentee drupal name.
    *
    * @param string $name
-   *   The Livecode drupal name.
+   *   The Mentee drupal name.
    *
-   * @return \Drupal\betelgeuseridho\Entity\LivecodeDrupalInterface
-   *   The called Livecode drupal entity.
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
    */
   public function setName($name);
 
   /**
-   * Gets the Livecode drupal creation timestamp.
+   * Gets the Mentee drupal creation timestamp.
    *
    * @return int
-   *   Creation timestamp of the Livecode drupal.
+   *   Creation timestamp of the Mentee drupal.
    */
   public function getCreatedTime();
 
   /**
-   * Sets the Livecode drupal creation timestamp.
+   * Sets the Mentee drupal creation timestamp.
    *
    * @param int $timestamp
-   *   The Livecode drupal creation timestamp.
+   *   The Mentee drupal creation timestamp.
    *
-   * @return \Drupal\betelgeuseridho\Entity\LivecodeDrupalInterface
-   *   The called Livecode drupal entity.
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
    */
   public function setCreatedTime($timestamp);
 
   /**
-   * Returns the Livecode drupal published status indicator.
+   * Returns the Mentee drupal published status indicator.
    *
-   * Unpublished Livecode drupal are only visible to restricted users.
+   * Unpublished Mentee drupal are only visible to restricted users.
    *
    * @return bool
-   *   TRUE if the Livecode drupal is published.
+   *   TRUE if the Mentee drupal is published.
    */
   public function isPublished();
 
   /**
-   * Sets the published status of a Livecode drupal.
+   * Sets the published status of a Mentee drupal.
    *
    * @param bool $published
-   *   TRUE to set this Livecode drupal to published, FALSE to set it to unpublished.
+   *   TRUE to set this Mentee drupal to published, FALSE to set it to unpublished.
    *
-   * @return \Drupal\betelgeuseridho\Entity\LivecodeDrupalInterface
-   *   The called Livecode drupal entity.
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
    */
   public function setPublished($published);
+
+
+    /**
+   * Gets the Mentee drupal name.
+   *
+   * @return string
+   *   Name of the Mentee drupal.
+   */
+  public function getDate();
+
+  /**
+   * Sets the Mentee drupal name.
+   *
+   * @param string $name
+   *   The Mentee drupal name.
+   *
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
+   */
+  public function setDate($date);
+
+    /**
+   * Gets the Mentee drupal name.
+   *
+   * @return string
+   *   Name of the Mentee drupal.
+   */
+  public function getSubject();
+
+  /**
+   * Sets the Mentee drupal name.
+   *
+   * @param string $name
+   *   The Mentee drupal name.
+   *
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
+   */
+  public function setSubject($subject);
+
+    /**
+   * Gets the Mentee drupal name.
+   *
+   * @return string
+   *   Name of the Mentee drupal.
+   */
+  public function getQuestion();
+
+  /**
+   * Sets the Mentee drupal name.
+   *
+   * @param string $name
+   *   The Mentee drupal name.
+   *
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
+   */
+  public function setQuestion($question);
+
+    /**
+   * Gets the Mentee drupal name.
+   *
+   * @return string
+   *   Name of the Mentee drupal.
+   */
+  public function getPercentage();
+
+  /**
+   * Sets the Mentee drupal name.
+   *
+   * @param string $name
+   *   The Mentee drupal name.
+   *
+   * @return \Drupal\betelgeuseridho\Entity\MenteeDrupalInterface
+   *   The called Mentee drupal entity.
+   */
+  public function setPercentage($percentage);
 
 }

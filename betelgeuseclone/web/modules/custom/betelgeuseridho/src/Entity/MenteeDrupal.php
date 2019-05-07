@@ -42,6 +42,9 @@ use Drupal\user\UserInterface;
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
  *     "status" = "status",
+ *     "telephone" = "telephone",
+ *     "attendance_number" = "attendance_number",
+ *     "score" = "score",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/mentee_drupal/{mentee_drupal}",
@@ -142,6 +145,48 @@ class MenteeDrupal extends ContentEntityBase implements MenteeDrupalInterface {
     return $this;
   }
 
+    /**
+   * {@inheritdoc}
+   */
+  public function getTelephone() {
+    return $this->get('telephone')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setTelephone($telephone) {
+    $this->set('telephone', $telephone);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getAttendanceNumber() {
+    return $this->get('attendance_number')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setAttendanceNumber($attendance_number) {
+    $this->set('attendance_number', $attendance_number);
+    return $this;
+  }
+
+  public function getScore() {
+    return $this->get('score')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setScore($score) {
+    $this->set('score', $score);
+    return $this;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -210,6 +255,58 @@ class MenteeDrupal extends ContentEntityBase implements MenteeDrupalInterface {
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+      $fields['telephone'] = BaseFieldDefinition::create('telephone')
+      ->setName('telephone')
+      ->setLabel(t('Telephone'))
+      ->setSettings([])
+      ->setDisplayOptions('form', [
+        'weight' => 2,
+      ]);
+
+      $fields['attendance_number'] = BaseFieldDefinition::create('integer')
+    ->setLabel(t('Attendance Number'))
+    ->setDescription(t('Mentee\'s attencdance number.'))
+    ->setSettings([
+      'max_length' => 255,
+      'text_processing' => 0,
+    ])
+    ->setDefaultValue('')
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'type' => 'number',
+      'weight' => -4,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'number',
+      'weight' => -4,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE)
+    ->setStorageRequired(TRUE)
+    ->setRequired(TRUE);
+  
+    $fields['score'] = BaseFieldDefinition::create('integer')
+    ->setLabel(t('Score'))
+    ->setDescription(t('Mentee\'s score.'))
+    ->setSettings([
+      'max_length' => 255,
+      'text_processing' => 0,
+    ])
+    ->setDefaultValue('')
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'type' => 'number',
+      'weight' => -4,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'number',
+      'weight' => -4,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE)
+    ->setStorageRequired(TRUE)
+    ->setRequired(TRUE);
 
     return $fields;
   }

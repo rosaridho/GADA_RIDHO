@@ -42,6 +42,9 @@ use Drupal\user\UserInterface;
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
  *     "status" = "status",
+ *     "telephone" = "telephone",
+ *     "subject" = "subject",
+ *     "cardinal" = "cardinal",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/mentor_drupal/{mentor_drupal}",
@@ -142,6 +145,51 @@ class MentorDrupal extends ContentEntityBase implements MentorDrupalInterface {
     return $this;
   }
 
+    /**
+   * {@inheritdoc}
+   */
+  public function getTelephone() {
+    return $this->get('telephone')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setTelephone($telephone) {
+    $this->set('telephone', $telephone);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSubject() {
+    return $this->get('subject')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setSubject($subject) {
+    $this->set('subject', $subject);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCardinal() {
+    return $this->get('cardinal')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setCardinal($cardinal) {
+    $this->set('cardinal', $cardinal);
+    return $this;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -210,6 +258,44 @@ class MentorDrupal extends ContentEntityBase implements MentorDrupalInterface {
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+      $fields['telephone'] = BaseFieldDefinition::create('telephone')
+      ->setName('telephone')
+      ->setLabel(t('Telephone'))
+      ->setSettings([])
+      ->setDisplayOptions('form', [
+        'weight' => 2,
+      ]);
+
+      $fields['subject'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('The subject'))
+      ->setDescription(t('The subject'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'subject_drupal')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+      
+    $fields['testCardinal'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('test Cardinal'))
+      ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED);
 
     return $fields;
   }

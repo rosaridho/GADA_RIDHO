@@ -74,4 +74,60 @@ interface ChallengeDrupalInterface extends ContentEntityInterface, EntityChanged
    */
   public function setPublished($published);
 
+  /**
+   * Gets the City.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getQuestion();
+
+  /**
+   * Sets the City.
+   *
+   * @param string $city
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setQuestion($question);
+
+  /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getPercentage();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setPercentage($percentage);
+
+    /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getSubject();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setSubject($subject);
 }

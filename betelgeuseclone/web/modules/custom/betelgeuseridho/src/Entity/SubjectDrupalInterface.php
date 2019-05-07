@@ -67,11 +67,51 @@ interface SubjectDrupalInterface extends ContentEntityInterface, EntityChangedIn
    * Sets the published status of a Subject drupal.
    *
    * @param bool $published
-   *   TRUE to set this Subject drupal to published, FALSE to set it to unpublished.
+   *   TRUE to set this Subject drupal  to published, FALSE to set it to unpublished.
    *
    * @return \Drupal\betelgeuseridho\Entity\SubjectDrupalInterface
    *   The called Subject drupal entity.
    */
   public function setPublished($published);
+
+
+    /**
+   * Gets the City.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getStartAt();
+
+  /**
+   * Sets the City.
+   *
+   * @param string $city
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setStartAt($telephone);
+
+  /**
+   * Gets the Branch.
+   *
+   * @return string
+   *   SWIFT code.
+   */
+  public function getFinishAt();
+
+  /**
+   * Sets the Branch.
+   *
+   * @param string $branch
+   *   The SWIFT code.
+   *
+   * @return \Drupal\gada_profile\Entity\BankInterface
+   *   The called Bank entity.
+   */
+  public function setFinishAt($attendance_number);
+
 
 }
